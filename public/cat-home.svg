@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#fff7ed" />
+  <path d="M100 250 L300 120 L500 250 V320 H100 Z" fill="#f97316" />
+  <rect x="260" y="200" width="80" height="60" fill="#fff" />
+  <text x="300" y="360" font-family="Arial" font-size="22" fill="#92400e">Home Decor</text>
+</svg>
