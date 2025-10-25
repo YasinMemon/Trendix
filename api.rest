@@ -36,3 +36,6 @@ Content-Type: application/json
   "images": ["image1.jpg", "image2.jpg"]
 }
 ###
+
+GET http://localhost:3000/api/products
+###

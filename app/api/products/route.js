@@ -29,3 +29,13 @@ export async function POST(request) {
         return NextResponse.json({ message: error.message }, { status: 500 });
     }
 }
+
+export async function GET() {
+    try {
+        await dbConnect();
+        const products = await ProductModel.find({});
+        return NextResponse.json({ products }, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ message: error.message }, { status: 500 });
+    }
+}

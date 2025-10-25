@@ -8,186 +8,6 @@ import ProductCardEnhanced from '@/components/ProductCardEnhanced';
 import CategoryFilter from '@/components/CategoryFilter';
 import PromoBanner from '@/components/PromoBanner';
 
-// Dummy product data
-const allProducts = [
-  // Fashion Products
-  {
-    id: 1,
-    name: 'Premium Leather Jacket',
-    category: 'Fashion',
-    price: 4999,
-    originalPrice: 7999,
-    discount: 37,
-    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&auto=format&fit=crop',
-    rating: 5,
-    reviews: 128,
-    badge: 'Bestseller'
-  },
-  {
-    id: 2,
-    name: 'Designer Sunglasses',
-    category: 'Accessories',
-    price: 1299,
-    originalPrice: 2499,
-    discount: 48,
-    image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format&fit=crop',
-    rating: 4,
-    reviews: 89
-  },
-  {
-    id: 3,
-    name: 'Wireless Earbuds Pro',
-    category: 'Electronics',
-    price: 2999,
-    originalPrice: 4999,
-    discount: 40,
-    image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=500&auto=format&fit=crop',
-    rating: 5,
-    reviews: 256,
-    badge: 'Hot'
-  },
-  {
-    id: 4,
-    name: 'Stylish Sneakers',
-    category: 'Fashion',
-    price: 3499,
-    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&auto=format&fit=crop',
-    rating: 4,
-    reviews: 167
-  },
-  {
-    id: 5,
-    name: 'Smart Watch Ultra',
-    category: 'Electronics',
-    price: 12999,
-    originalPrice: 15999,
-    discount: 19,
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&auto=format&fit=crop',
-    rating: 5,
-    reviews: 342,
-    badge: 'New'
-  },
-  {
-    id: 6,
-    name: 'Casual T-Shirt',
-    category: 'Fashion',
-    price: 599,
-    originalPrice: 999,
-    discount: 40,
-    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format&fit=crop',
-    rating: 4,
-    reviews: 94
-  },
-  {
-    id: 7,
-    name: 'Bluetooth Speaker',
-    category: 'Electronics',
-    price: 1999,
-    originalPrice: 3499,
-    discount: 43,
-    image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&auto=format&fit=crop',
-    rating: 4,
-    reviews: 178
-  },
-  {
-    id: 8,
-    name: 'Leather Wallet',
-    category: 'Accessories',
-    price: 799,
-    originalPrice: 1299,
-    discount: 38,
-    image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&auto=format&fit=crop',
-    rating: 5,
-    reviews: 145
-  },
-  {
-    id: 9,
-    name: 'Decorative Wall Clock',
-    category: 'Home Decor',
-    price: 1499,
-    image: 'https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?w=500&auto=format&fit=crop',
-    rating: 4,
-    reviews: 67
-  },
-  {
-    id: 10,
-    name: 'Wireless Headphones',
-    category: 'Electronics',
-    price: 2499,
-    originalPrice: 3999,
-    discount: 37,
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop',
-    rating: 5,
-    reviews: 423,
-    badge: 'Bestseller'
-  },
-  {
-    id: 11,
-    name: 'Cotton Hoodie',
-    category: 'Fashion',
-    price: 1299,
-    originalPrice: 1999,
-    discount: 35,
-    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&auto=format&fit=crop',
-    rating: 4,
-    reviews: 112
-  },
-  {
-    id: 12,
-    name: 'Minimalist Table Lamp',
-    category: 'Home Decor',
-    price: 899,
-    originalPrice: 1499,
-    discount: 40,
-    image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500&auto=format&fit=crop',
-    rating: 5,
-    reviews: 89
-  },
-  {
-    id: 13,
-    name: 'USB-C Cable',
-    category: 'Accessories',
-    price: 299,
-    image: 'https://images.unsplash.com/photo-1591290619762-d4b64a93b8e1?w=500&auto=format&fit=crop',
-    rating: 4,
-    reviews: 234
-  },
-  {
-    id: 14,
-    name: 'Gaming Mouse',
-    category: 'Electronics',
-    price: 1499,
-    originalPrice: 2499,
-    discount: 40,
-    image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=500&auto=format&fit=crop',
-    rating: 5,
-    reviews: 189,
-    badge: 'Hot'
-  },
-  {
-    id: 15,
-    name: 'Denim Jeans',
-    category: 'Fashion',
-    price: 1899,
-    originalPrice: 2999,
-    discount: 37,
-    image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=500&auto=format&fit=crop',
-    rating: 4,
-    reviews: 156
-  },
-  {
-    id: 16,
-    name: 'Decorative Cushions',
-    category: 'Home Decor',
-    price: 599,
-    originalPrice: 999,
-    discount: 40,
-    image: 'https://images.unsplash.com/photo-1584100936595-c0654b55a2e2?w=500&auto=format&fit=crop',
-    rating: 4,
-    reviews: 78
-  },
-];
-
 const categories = ['All', 'Fashion', 'Electronics', 'Accessories', 'Home Decor'];
 
 export default function ProductsPage() {
@@ -213,6 +33,10 @@ export default function ProductsPage() {
     };
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    setVisibleProducts(8); // Reset visible products when allProducts change
+  }, [allProducts]);
 
   // Filter products by category
   const filteredProducts = activeCategory === 'All'
@@ -283,7 +107,7 @@ export default function ProductsPage() {
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
-          {displayedProducts.map((product, index) => (
+          {allProducts.map((product, index) => (
             <ProductCardEnhanced key={product.id} product={product} index={index} />
           ))}
         </div>

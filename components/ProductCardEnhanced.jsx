@@ -4,14 +4,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function ProductCardEnhanced({ product, index }) {
+  console.log("Rendering product:", product);
   const [isAdding, setIsAdding] = useState(false);
-
+  const router = useRouter();
   const handleAddToCart = () => {
     setIsAdding(true);
     setTimeout(() => setIsAdding(false), 1000);
   };
+
+  const handleRedirect = () => {
+    router.push(`/product/${product.id}`);
+  }
 
   return (
     <motion.div
@@ -22,8 +28,7 @@ export default function ProductCardEnhanced({ product, index }) {
       className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group"
     >
       {/* Product Image */}
-      <Link href={`/product/${product.id}`}>
-        <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-gray-100 cursor-pointer">
+        <div onClick={handleRedirect} className="relative h-56 sm:h-64 w-full overflow-hidden bg-gray-100 cursor-pointer">
           <Image
             src={product.image}
             alt={product.name}
@@ -42,7 +47,6 @@ export default function ProductCardEnhanced({ product, index }) {
             </div>
           )}
         </div>
-      </Link>
 
       {/* Product Info */}
       <div className="p-4 sm:p-5">
