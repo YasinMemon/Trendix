@@ -26,9 +26,9 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "name": "New Product",
-  "description": "This is a new product",
-  "price": 99.99,
+  "name": "testing product",
+  "description": "this is a testing product",
+  "price": 1200,
   "category": "Electronics",
   "brand": "Brand Name",
   "stock": 100,
@@ -38,4 +38,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/api/products
+###
+
+GET http://localhost:3000/api/products/68fdf405b2b0837f2f129dca?id=68fdf405b2b0837f2f129dca
 ###

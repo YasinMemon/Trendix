@@ -7,10 +7,12 @@ import Footer from '@/components/Footer';
 import ProductCardEnhanced from '@/components/ProductCardEnhanced';
 import CategoryFilter from '@/components/CategoryFilter';
 import PromoBanner from '@/components/PromoBanner';
+import { useRouter } from 'next/navigation';
 
 const categories = ['All', 'Fashion', 'Electronics', 'Accessories', 'Home Decor'];
 
 export default function ProductsPage() {
+    const router = useRouter();
   const [activeCategory, setActiveCategory] = useState('All');
   const [visibleProducts, setVisibleProducts] = useState(8);
   const [allProducts, setAllProducts] = useState([]);
@@ -54,6 +56,10 @@ export default function ProductsPage() {
     setActiveCategory(category);
     setVisibleProducts(8); // Reset to initial count when category changes
   };
+
+    const handleRedirect = (product) => {
+    router.push(`/product/${product._id}`);
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -108,7 +114,7 @@ export default function ProductsPage() {
         {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
           {allProducts.map((product, index) => (
-            <ProductCardEnhanced key={product.id} product={product} index={index} />
+            <ProductCardEnhanced key={product._id} product={product} index={index} handleRedirect={handleRedirect} />
           ))}
         </div>
 

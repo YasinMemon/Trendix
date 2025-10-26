@@ -5,8 +5,7 @@ import { dbConnect } from "../../database/dbConnect";
 export async function POST(request) {
     try {
         await dbConnect();
-        const { name, description, price, category, brand, stock, isTrending } = await request.json();
-        const { images } = request.body;
+        const { name, description, price, category, brand, stock, isTrending, images } = await request.json();
         
         const newProduct = {
             name,

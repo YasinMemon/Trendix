@@ -4,20 +4,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
-export default function ProductCardEnhanced({ product, index }) {
-  console.log("Rendering product:", product);
+export default function ProductCardEnhanced({ product, index, handleRedirect }) {
   const [isAdding, setIsAdding] = useState(false);
-  const router = useRouter();
   const handleAddToCart = () => {
     setIsAdding(true);
     setTimeout(() => setIsAdding(false), 1000);
   };
 
-  const handleRedirect = () => {
-    router.push(`/product/${product.id}`);
-  }
+  console.log(product);
 
   return (
     <motion.div
@@ -28,9 +24,9 @@ export default function ProductCardEnhanced({ product, index }) {
       className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group"
     >
       {/* Product Image */}
-        <div onClick={handleRedirect} className="relative h-56 sm:h-64 w-full overflow-hidden bg-gray-100 cursor-pointer">
+        <div onClick={() => {handleRedirect(product)}} className="relative h-56 sm:h-64 w-full overflow-hidden bg-gray-100 cursor-pointer">
           <Image
-            src={product.image}
+            src={product.images[0]}
             alt={product.name}
             fill
             className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -56,7 +52,10 @@ export default function ProductCardEnhanced({ product, index }) {
           </span>
         </div>
         
-        <Link href={`/product/${product.id}`}>
+        {/* <img src={product.images[0]} alt="" srcset="" />
+        <h1>hello world</h1> */}
+
+        <Link href={`/product/${product._id}`}>
           <h3 className="text-base sm:text-lg font-semibold text-gray-900 hover:text-indigo-600 transition-colors cursor-pointer line-clamp-2 mb-2">
             {product.name}
           </h3>
