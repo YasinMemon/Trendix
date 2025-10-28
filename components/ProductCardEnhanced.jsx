@@ -8,12 +8,37 @@ import { useRouter } from 'next/navigation';
 
 export default function ProductCardEnhanced({ product, index, handleRedirect }) {
   const [isAdding, setIsAdding] = useState(false);
-  const handleAddToCart = () => {
-    setIsAdding(true);
-    setTimeout(() => setIsAdding(false), 1000);
+  const handleAddToCart = async () => {
+    try {
+      setIsAdding(true);
+      const response = await fetch('/api/cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: product._id,
+          quantity: 1,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to add item to cart');
+      }
+
+      const data = await response.json();
+      console.log('Item added to cart:', data);
+    } catch (error) {
+      setIsAdding(false);
+      console.error("Add to cart error:", error);
+    } finally {
+      setTimeout(() => {
+        setIsAdding(false);
+      }, 1000);
+    }
   };
 
-  console.log(product);
+  // console.log(product);
 
   return (
     <motion.div

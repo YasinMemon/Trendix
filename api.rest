@@ -42,3 +42,11 @@ GET http://localhost:3000/api/products
 
 GET http://localhost:3000/api/products/68fdf405b2b0837f2f129dca?id=68fdf405b2b0837f2f129dca
 ###
+
+POST http://localhost:3000/api/cart
+Content-Type: application/json
+
+{
+  "productId": "68fe16091c42323351139c90",
+  "quantity": 2
+}

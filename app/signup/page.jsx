@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 export default function SignupPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -28,8 +28,8 @@ export default function SignupPage() {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = 'Full Name is required';
     }
 
     if (!formData.email.trim()) {
@@ -64,7 +64,24 @@ export default function SignupPage() {
     setIsLoading(true);
 
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch('http://localhost:3000/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to register');
+      }
+
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
 
     // Redirect to login page on success
     router.push('/login');
@@ -133,16 +150,16 @@ export default function SignupPage() {
               </div>
               <input
                 type="text"
-                id="name"
-                name="name"
-                value={formData.name}
+                id="fullName"
+                name="fullName"
+                value={formData.fullName}
                 onChange={handleChange}
-                className={`w-full pl-12 pr-4 py-3 border ${errors.name ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all`}
+                className={`w-full pl-12 pr-4 py-3 border ${errors.fullName ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all`}
                 placeholder="John Doe"
               />
             </div>
-            {errors.name && (
-              <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+            {errors.fullName && (
+              <p className="mt-1 text-sm text-red-600">{errors.fullName}</p>
             )}
           </div>
 

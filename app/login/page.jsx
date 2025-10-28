@@ -27,14 +27,25 @@ export default function LoginPage() {
     setError('');
 
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
 
-    // For demo purposes - accept any email/password
-    if (formData.email && formData.password) {
-      // Redirect to home page on success
-      router.push('/');
-    } else {
-      setError('Please enter valid credentials');
+    try {
+      const response = await fetch('http://localhost:3000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to login');
+      }
+
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
       setIsLoading(false);
     }
   };
